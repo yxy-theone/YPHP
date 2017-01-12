@@ -2,7 +2,7 @@
 return [
 	'drive'=>'mysqli',//数据库驱动  mysqli,pdo
 	'me'=>[
-		'dbhost'=>'',
+		'dbhost'=>'ip',
 		'dbport'=>'3306',
 		'dbuser'=>'root',
 		'dbpwd'=>'',
