@@ -1,0 +1,41 @@
+.states-info {
+    color: #fff;
+}
+.states-info .red-bg {
+    background: #FC8675;
+}
+.states-info .blue-bg {
+    background: #5AB6DF;
+}
+.states-info .green-bg {
+    background: #65CEA7;
+}
+.states-info .yellow-bg {
+    background: #EBC85E;
+}
+
+.states-info i {
+    font-size: 50px;
+}
+.states-info .state-title {
+    font-size: 13px;
+}
+.states-info h4 {
+    margin-bottom: 0;
+}
+
+/****分页样式****/
+.pagination li a {
+    color:#000;
+}
+.pagination li a:hover {
+    color: #65CEA7;
+}
+
+/****顶部功能连接 搜索+各种按钮*****/
+.top-tool-bar .col-xs-2 {
+    text-align: center;
+}
+.top-tool-bar .col-xs-2 .add {
+    margin-bottom: 20px;
+}

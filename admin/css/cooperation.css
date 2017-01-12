@@ -1,0 +1,104 @@
+/*********progress**********/
+.post-wrap aside {
+    display: table-cell;
+    float: none;
+    height: 100%;
+    padding: 0;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #65cea7;
+}
+.pro-box {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.post-highlight {
+    background: #eee;
+    cursor: pointer;
+}
+.post-highlight.on {
+    color: #fff;
+    background: #65cea7;
+}
+.post-highlight:hover {
+    color: #fff;
+    background: #65CF66;
+}
+
+.tab-info {
+    display: none;
+}
+.tab-info.on {
+    display: block;
+}
+.tab-info h1 {
+    text-align: center;
+    margin-top: 100px;
+}
+.tab-info h1 a:hover {
+    color: #EE4000;
+    text-decoration: none;
+}
+
+ul.p-info {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+ul.p-info li {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+ul.p-info li:last-child {
+    margin-bottom: 0;
+}
+
+ul.p-info .title, ul.p-info .desk {
+    float: left;
+}
+
+ul.p-info .title {
+    width: 30%;
+}
+
+ul.p-info .desk {
+    width: 70%;
+    color: #65cea7;
+}
+
+/******表单图标*******/
+.info-form label {
+    color: #65cea7;
+}
+.iconic-input {
+    position: relative;
+}
+.iconic-input i {
+    color: #CCCCCC;
+    display: block;
+    font-size: 16px;
+    height: 16px;
+    margin: 8px 5px 8px 10px;
+    position: absolute;
+    text-align: center;
+    width: 16px;
+}
+.iconic-input input {
+    padding-left: 30px !important;
+}
+.iconic-input.right input {
+    padding-left: 10px !important;
+    padding-right: 30px !important;
+}
+.iconic-input.right i {
+    float: right;
+    right: 5px;
+}
+
+/*省市联动*/

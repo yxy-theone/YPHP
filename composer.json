@@ -1,0 +1,13 @@
+{
+    "require": {
+       "monolog/monolog": "1.0.*",
+        "catfan/Medoo": "^1.1",
+        "aliyuncs/oss-sdk-php": "~2.0"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}
