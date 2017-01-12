@@ -4,6 +4,7 @@ my php framework
 #配置文件示例
 ###全局配置文件：在common下新建conf目录,然后conf目录下新建db.php和web.php
 
+``````````````````````````````````````````````
 db.php
 	<?php
 	return [
