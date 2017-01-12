@@ -4,7 +4,8 @@ my php framework
 #配置文件示例#
 ###全局配置文件：在common下新建conf目录,然后conf目录下新建db.php和web.php###
 
->db.php
+db.php
+<pre>
 	<?php
 	return [
 		'drive'=>'mysqli',//数据库驱动  mysqli,pdo
@@ -16,8 +17,9 @@ my php framework
 			'dbname'=>''
 		],
 	];
+</pre>
 
->web.php
+web.php
 	<?php
 	return [
 		'route_type'=>1,//路由类型 1常规 index.php?act=index&op=index  2美化  www.xx.com/index/index/id/1
