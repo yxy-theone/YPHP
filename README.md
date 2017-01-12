@@ -4,9 +4,10 @@ my php framework
 #配置文件示例
 ###全局配置文件：在common下新建conf目录,然后conf目录下新建db.php和web.php
 
-db.php
-	<?php
-	return [
+###db.php
+```a
+    <?php
+    return [
 		'drive'=>'mysqli',//数据库驱动  mysqli,pdo
 		'me'=>[
 			'dbhost'=>'',
@@ -16,10 +17,12 @@ db.php
 			'dbname'=>''
 		],
 	];
-``````````````````````````````````````````````
-web.php
-	<?php
-	return [
+```
+
+###web.php
+```a
+    <?php
+    return [
 		'route_type'=>1,//路由类型 1常规 index.php?act=index&op=index  2美化  www.xx.com/index/index/id/1
 		'log'=>[
 			'drive'=>'file',//默认日志操作驱动类  mysql,mongodb
@@ -44,7 +47,8 @@ web.php
 		],
 		'captcha'=>'',
 	];
-``````````````````````````````````````````````
+```
+
 ###具体应用配置文件
 比如是admin应用，则在apps/admin下新建conf目录，文件及配置同上。。
 配置文件是覆盖作用的
