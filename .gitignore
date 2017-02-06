@@ -3,3 +3,12 @@ conf/
 
 #我的简历
 resume
+
+#本地存储目录 自建storage目录 下有cache,log,sessions
+storage/
+
+#composer加载的第三方类库
+vendor/
+
+#composer锁定文件
+composer.lock
