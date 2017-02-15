@@ -221,6 +221,7 @@ class Model
 class ModelDb
 {
     private $db_index;
+    private $str_replace = false;//是否在escapeString函数中之下str替换 在增改操作下执行替换
 
     public function __construct($host=0){
         $this->db_index=$host;
@@ -495,6 +496,7 @@ class ModelDb
      * @return boolean           插入成功or失败
      */
     public function insert($data,$options=array(),$replace=false) {
+        $this->str_replace = true;//开启替换
         $values = $fields = array();
         foreach ($data as $key=>$val){
             $value  =  $this->parseValue($val);
@@ -514,6 +516,7 @@ class ModelDb
      * @return boolean           修改成功or失败
      */
     public function update($data,$options) {
+        $this->str_replace = true;//开启替换
         $sql   = 'UPDATE '
             .$this->parseAttr($options)
             .$this->parseTable($options)
@@ -567,6 +570,7 @@ class ModelDb
 	 * 批量插入
 	 */
     public function insertAll($datas,$options=array(),$replace=false) {
+        $this->str_replace = true;//开启替换
         if(!is_array($datas[0])) return false;
         $fields = array_keys($datas[0]);
         $values = array();
@@ -588,6 +592,7 @@ class ModelDb
      * 插入重复时更新
      */
     public function insert_duplicate_updateAll($datas,$options=array(),$update_data=array()){
+        $this->str_replace = true;//开启替换
         if(!is_array($datas[0])) return false;
         $fields = array_keys($datas[0]);
         $values = array();
@@ -656,6 +661,16 @@ class ModelDb
     }
 
     public function escapeString($str) {
+        if ($this->str_replace) {
+            $danger_word_arr = ['/insert/i','/update/i','/drop/i','/delete/i','/create/i','/alter/i','/sleep/i','/benchmark/i','/load_file/i','/outfile/i'];
+            $danger_word_replace_arr = ['i-nser-t','u-pdat-e','d-ro-p','d-elet-e','c-reat-e','a-lte-r','s-lee-p','b-enchmar-k','l-oad_fil-e','o-utfil-e'];
+            $replace_times = 0;
+            $str = preg_replace($danger_word_arr, $danger_word_replace_arr, $str,'-1',$replace_times);
+            if ($replace_times > 0) {
+                $error = "黑客尝试,来源ip:".getIp();
+                Log::record($error."\r\n".$str,'DANGER');
+            }
+        }
     	return addslashes($str);//防注入 加反斜杠
     }
 
