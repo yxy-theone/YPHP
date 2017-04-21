@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
-    <title>error Page</title>
+    <title>Error Page</title>
     <style type="text/css">
     body {
         background: #424f63;
@@ -25,13 +25,11 @@
     .error-wrapper h2 {
         font-size: 40px;
         color: #fff;
-        text-transform: uppercase;
         font-weight: bold;
     }
     .error-wrapper h3 {
         font-size: 32px;
         color: #474747;
-        text-transform: uppercase;
         font-weight: bold;
         line-height: 30px;
         margin-top: 0;
@@ -75,7 +73,7 @@
                 <h1><img src="resources/img/500-error.png"></h1>
                 <h2>bad request</h2>
             <?php } ?>
-            <h3><?php echo htmlspecialchars($message) ?></h3>
+            <h3><?php echo htmlentities($message) ?></h3>
             <?php if (!empty($reffer_url)) { ?>
                 <a class="back-btn" href="<?php echo $reffer_url ?>">返回上一页</a>
             <?php } ?>

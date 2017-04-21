@@ -26,25 +26,16 @@ class Model
      * @return $this 自身对象
      */
     public function __call($method,$args) {
-        $method = strtolower($method);
-        if(in_array($method,array('field','table','order','where','on','join','limit','having','group','lock','master','distinct','index','attr'),true)) {
+        if(in_array(strtolower($method),array('field','table','order','where','on','join','limit','having','group','lock','master','distinct','index','attr'),true)) {
             if(empty($args[0])){
                 return $this;
             }
-            $this->options[$method]=$args[0];
+            $this->options[strtolower($method)] =$args[0];
             return $this;
         }else{
             $error = 'Model Error:  Function '.$method.' is not exists!';
             exit($error);
         }
-    }
-
-    /**
-     * 调试方法 输出SQL
-     */
-    public function debug(){
-        Db::$is_debug = true;
-        return $this;
     }
 
     /**

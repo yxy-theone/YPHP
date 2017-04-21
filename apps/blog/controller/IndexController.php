@@ -80,17 +80,18 @@ class IndexController extends \framework\Controller
 	 * 文章详情
 	 */
 	public function detailOp(){
-		$id = $_GET['id'];//文章id
-		if (!is_numeric($id)) {
+		$id = intval($_GET['id']);//文章id
+		if ($id <= 0) {
 			Log::record("黑客尝试,来源ip:".getIp(),'DANGER');
 			throw new \Exception("我会找到你的", 9);
 		}
-		$article = M('me/article')->getArticle(['id'=>intval($id)]);
+		$article = M('me/article')->getArticle(['id'=>$id]);
 		if (empty($article))
 			throw new \Exception("找不到这篇文章", 404);
 		if ($article['astrict'] == 1 && empty($_SESSION['adminname'])) {
 			$article['article_content'] = '<h2 class="text-danger">Sorry,这篇文章只有管理员才能查看</h2>';
 		}
+		$next_article = M('me/article')->getArticle(['id'=>['gt',$id]]);
 		$categorys = M('me/article_category')->getCategory();
 		$tags = M('me/article_tag')->getTag();
 		$this->display('detail',[
