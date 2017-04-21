@@ -91,11 +91,14 @@ class IndexController extends \framework\Controller
 		if ($article['astrict'] == 1 && empty($_SESSION['adminname'])) {
 			$article['article_content'] = '<h2 class="text-danger">Sorry,这篇文章只有管理员才能查看</h2>';
 		}
-		$next_article = M('me/article')->getArticle(['id'=>['gt',$id]]);
+		$next_article = M('me/article')->order('id DESC')->getArticle(['id'=>['lt',$id]],'id,title');//下一篇
+		$prev_article = M('me/article')->order('id ASC')->getArticle(['id'=>['gt',$id]],'id,title');//上一篇
 		$categorys = M('me/article_category')->getCategory();
 		$tags = M('me/article_tag')->getTag();
 		$this->display('detail',[
 			'article'=>$article,
+			'next_article'=>$next_article,
+			'prev_article'=>$prev_article,
 			'categorys'=>$categorys,
 			'tags'=>$tags
 		]);
