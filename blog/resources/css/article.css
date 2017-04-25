@@ -1,0 +1,21 @@
+.article-author {
+	margin-top: 25px;
+    position: relative;
+    align-items: center;
+    font-size: 14px;
+    color: #808080;
+}
+.article-authorAvatar {
+    margin-right: 10px;
+}
+.article-author .article-authorName, .article-author time {
+    color: #808080;
+}
+.Avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+.article-createtime {
+    margin-left: 30px;
+}

@@ -85,14 +85,16 @@ class IndexController extends \framework\Controller
 			Log::record("黑客尝试,来源ip:".getIp(),'DANGER');
 			throw new \Exception("我会找到你的", 9);
 		}
-		$article = M('me/article')->getArticle(['id'=>$id]);
-		if (empty($article))
-			throw new \Exception("找不到这篇文章", 404);
+		$m_article = M('me/article');
+		$article = $m_article->getArticle(['id'=>$id]);
+		$_GET['category'] = $article['category'];//详情页中文章分类影响导航
+		if (empty($article)) throw new \Exception("找不到这篇文章", 404);
+		$m_article->editArticle(['id'=>$id],['click'=>['exp','click+1']]);
 		if ($article['astrict'] == 1 && empty($_SESSION['adminname'])) {
 			$article['article_content'] = '<h2 class="text-danger">Sorry,这篇文章只有管理员才能查看</h2>';
 		}
-		$next_article = M('me/article')->order('id DESC')->getArticle(['id'=>['lt',$id]],'id,title');//下一篇
-		$prev_article = M('me/article')->order('id ASC')->getArticle(['id'=>['gt',$id]],'id,title');//上一篇
+		$next_article = $m_article->order('id DESC')->getArticle(['id'=>['lt',$id]],'id,title');//下一篇
+		$prev_article = $m_article->order('id ASC')->getArticle(['id'=>['gt',$id]],'id,title');//上一篇
 		$categorys = M('me/article_category')->getCategory();
 		$tags = M('me/article_tag')->getTag();
 		$this->display('detail',[

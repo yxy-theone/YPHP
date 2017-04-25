@@ -10,12 +10,12 @@ use framework\lib\Route;
 	<meta charset="UTF-8">
 	<title><?php echo View::$title; ?></title>
 	<?php View::getMetaTag() ?>
-	<?php View::getCssFile() ?>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/common/reset.css" />
 	<link rel="stylesheet" href="resources/common/font-awesome.min.css">
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/css/comm.css">
 	<link rel="stylesheet" href="resources/css/toolbar.css">
+	<?php View::getCssFile() ?>
 </head>
 <body>
 <?php $act=$this->act;$op=$this->op;?>
@@ -55,31 +55,10 @@ use framework\lib\Route;
 
 	            <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 tm-aside-r">
 	                <div class="tm-aside-container">
-	                <?php if($op=='detail'){ ?>
-	                	<h3 class="tm-gold-text tm-title">
-	                	    文章信息
-	                	</h3>
-	                	<div class="tm-content-box tm-margin-t-small">
-	                	    <p>作者：<span class="text-info"><?php echo $article['author_name'] ?></span></p>
-	                	    <p>类别：<span><?php echo $categorys[$article['category']] ?></span></p>
-	                	    <p>最后修改：<br>
-	                	    <span><?php echo date('Y-m-d H:i:s',($article['updatetime']==0)?$article['createtime']:$article['updatetime']) ?></span></p>
-	                	    <?php if (!empty($article['tags'])) { ?>
-	                	        <?php $article_tag = explode(',', $article['tags']); ?>
-	                	        <p>标签：<br>
-	                	        <?php foreach ($article_tag as $k) { ?>
-	                	            <span class="tag-span" style="color:#FFF;background: <?php echo $tags[$k]['color']; ?>"><?php echo $tags[$k]['name']; ?></span>
-	                	        <?php } ?>
-	                	        </p>
-	                	    <?php } ?>
-	                	</div>
-	                <?php }else{ ?>
 	                    <h3 class="tm-gold-text tm-title">
 	                        写在前面
 	                    </h3>
-	                    <div class="tm-content-box tm-margin-t-small">
-	                        <p>个人框架,个人项目,可以尝试入侵,但是希望能把手段和结果反馈给我,QQ:2135420174,我向你学习。准备整个项目安全贡献榜,哈哈。</p>
-	                    </div>
+	                    <p>个人框架,个人项目,可以尝试入侵,但是希望能把手段和结果反馈给我,QQ:2135420174,我向你学习。准备整个项目安全贡献榜,哈哈。</p>
 	                    <hr class="tm-margin-t-small">
 	                    <h3 class="tm-gold-text tm-title">
 	                        所有标签
@@ -91,16 +70,13 @@ use framework\lib\Route;
 	                            <?php } ?>
 	                        </ul>
 	                    </nav>
-	                <?php } ?>
-	                	<hr class="tm-margin-t-small">
-						<h5 class="tm-gold-text tm-title">
-	                        帮朋友推广，报来源优惠50元
-	                    </h5>
+	                	<!--<hr class="tm-margin-t-small">
+						<h5 class="tm-gold-text tm-title">帮朋友推广，报来源优惠50元</h5>
 	                	<div class="ad">
-	                		<a href="https://item.taobao.com/item.htm?id=543753359335" target="_blank">
-	                			<img src="https://gd4.alicdn.com/imgextra/i4/1086387033/TB26CgFbl8lpuFjy0FnXXcZyXXa_!!1086387033.jpg_400x400.jpg_.webp" width="100%">
+	                		<a href="" target="_blank">
+	                			<img src="" width="100%">
 	                		</a>
-	                	</div>
+	                	</div>-->
 	                	<hr class="tm-margin-t-small">
 	                    <h3 class="tm-gold-text tm-title">
 	                        友情链接
@@ -117,7 +93,7 @@ use framework\lib\Route;
 	                    <nav>
 	                        <ul class="nav">
 	                            <li><a href="http://www.yjxxkj.cn" class="tm-footer-link">Mr.余</a></li>
-	                            <li><a href="https://github.com/yxy-theone/YPHP" target="_blank" class="tm-footer-link">YPHP</a></li>
+	                            <li><a href="https://github.com/yxy-theone/YPHP" target="_blank" class="tm-footer-link">YPHP-Github</a></li>
 	                        </ul>
 	                    </nav>
 	                </div> 
