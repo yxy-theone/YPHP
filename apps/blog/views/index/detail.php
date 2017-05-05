@@ -5,7 +5,7 @@ use framework\lib\Route;
 View::$title = '博客文章—'.$article['title'];
 View::registerMetaTag(['name' => 'description', 'content' => 'YPHP']);
 View::registerCssFile("http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css");
-View::registerCssFile("resources/css/article.css");
+View::registerCssFile("resources/css/article.css?v=1");
 // View::registerCssFile("http://cdn.mengzhidu.com/file/highlight/solarized-light.css");
 View::registerJsFile("http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js");
 ?>
@@ -40,6 +40,40 @@ View::registerJsFile("http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js")
 	<?php endif ?>
 </div>
 <hr style="clear: both;">
+<!--畅言PC和WAP自适应版-->
+<div id="SOHUCS" sid="<?php echo $article['id'] ?>"></div> 
+<script type="text/javascript"> 
+    (function(){ 
+        var appid = 'cysYPR99P'; 
+        var conf = '2f14e54adfcce306bdd7c97782252f71'; 
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) { 
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else { 
+            var loadJs=function(d,a){
+                var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+                var b=document.createElement("script");
+                b.setAttribute("type","text/javascript");
+                b.setAttribute("charset","UTF-8");
+                b.setAttribute("src",d);
+                if(typeof a==="function"){
+                    if(window.attachEvent){
+                        b.onreadystatechange=function(){
+                            var e=b.readyState;
+                            if(e==="loaded"||e==="complete"){
+                                b.onreadystatechange=null;a()
+                            }
+                        }
+                    }else{
+                        b.onload=a
+                    }
+                }
+                c.appendChild(b)
+            };
+            loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+        }
+    })();
+</script>
 <?php
 $js = <<<JSBLOCK
     hljs.initHighlightingOnLoad();

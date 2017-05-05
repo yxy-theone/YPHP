@@ -13,7 +13,7 @@ use framework\lib\Route;
 	<link rel="stylesheet" type="text/css" media="all" href="resources/common/reset.css" />
 	<link rel="stylesheet" href="resources/common/font-awesome.min.css">
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/comm.css?v=1">
+	<link rel="stylesheet" href="resources/css/comm.css?v=3">
 	<link rel="stylesheet" href="resources/css/toolbar.css">
 	<?php View::getCssFile() ?>
 </head>
