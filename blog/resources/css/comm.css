@@ -528,6 +528,7 @@ p { line-height: 1.9; }
     float: left;
     display: block;
     text-align: left;
+    color: rgba(0,0,0,.5);
 }
 .article-list-box .article-date {
     float: right;
@@ -628,7 +629,7 @@ p { line-height: 1.9; }
     text-align: center;
 }
 #article-info {
-    padding: 50px;
+    padding: 25px;
     margin:10px 0;
     background-color: #f7f8fa;
 }
@@ -639,8 +640,107 @@ p { line-height: 1.9; }
     padding: 2px 10px;
 }
 
-/********广告************/
-.ad a {
-    /* display: block;
-    margin: 10px 0; */
+/********右侧tab选项卡************/
+.tab-div {
+    margin: 0;
+    padding: 0;
+}
+.b-head ul, li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.b-slt-tab li {
+    float: left;
+    width: 50%;
+    text-align: center;
+    border: 2px solid #FFF;
+    cursor: pointer;
+}
+.b-slt-tab li.on {
+    border-bottom: 2px solid #cc9900;
+    background: #cc9900;
+    color: #FFF;
+}
+.b-slt-tab .b-tab-text {
+    font-size: 14px;
+}
+.tab-hr {
+    border: 1px solid #cc9900;
+}
+.rlist{
+    padding-bottom: 15px;
+}
+.rlist li {
+    overflow: hidden;
+    margin: 20px 0 0 0;
+    position: relative;
+    padding-left: 25px;
+}
+.rlist li .number {
+    position: absolute;
+    color: #fff;
+    height: 24px;
+    line-height: 17px;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    min-width: 20px;
+    text-align: center;
+    background-color: #b8c0cc;
+    z-index: 20;
+    border-radius: 4px;
+    padding: 5px;
+    font-weight: bolder;
+    font-style: normal;
+}
+.rlist li .number.n1, .rlist li .number.n2, .rlist li .number.n3 {
+    background: #f25d8e;
+}
+.rlist li .preview {
+    margin-right: 5px;
+    width: 80px;
+    height: 50px;
+    float: left;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.rlist li .rl-info {
+    float: left;
+}
+.rlist li .t {
+    line-height: 17px;
+    height: 18px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    color: #222;
+    font-size: 14px;
+}
+.rlist li.on .t, .rlist li:hover .t {
+    height: 36px;
+    line-height: 18px;
+    margin-top: -3px;
+    width: 170px;
+    padding: 0;
+}
+.rlist li .i {
+    margin-top: 5px;
+    display: block;
+    overflow: hidden;
+}
+.rlist li .i b {
+    padding-left: 13px;
+    display: block;
+    font-family: "microsoft yahei",simhei;
+    line-height: 12px;
+    color: #99a2aa;
+    font-weight: normal;
+    height: 12px;
+    float: left;
+    font-size: 12px;
+}
+.rlist li .i b.pts {
+    background: 0;
+    padding: 0;
 }

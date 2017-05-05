@@ -144,3 +144,42 @@ function getRelativeTime($date) {
         return $diff."星期前";
     return "on ".date("Y-m-d", $date);
 }
+
+/**
+ * 使用PHPMailer发送邮件
+ * @param  array  $config     PHPMailer的配置信息
+ * @param  array  $to         接收者数组
+ * @param  string $title      标题
+ * @param  string $content    邮件内容,可以是HTML
+ * @param  array  $attachment 附件数组
+ */
+function sendMail($config,$to,$title,$content,$attachment=array()){
+    $mail = new \PHPMailer;
+    $mail->isSMTP();
+    $mail->Host = $config['MAIL_HOST'];
+    $mail->SMTPAuth = $config['MAIL_SMTPAUTH'];
+    $mail->Username = $config['MAIL_USERNAME'];
+    $mail->Password = $config['MAIL_PASSWORD'];
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = $config['MAIL_PORT'];
+    $mail->CharSet = $config['MAIL_CHARSET'];
+    $mail->setFrom($config['MAIL_FROM'], $config['MAIL_FROMNAME']);
+    foreach($to as $val){
+        $mail->addAddress($val);
+    }
+    $mail->addReplyTo($config['MAIL_REPLYTO']);
+    $mail->addCC($config['MAIL_CC']);
+    $mail->addBCC($config['MAIL_BCC']);
+    if(!empty($attachment)){
+        foreach($attachment as $val){
+            $mail->addAttachment($val);
+        }
+    }
+    $mail->isHTML($config['MAIL_ISHTML']);
+    $mail->Subject = $title;
+    $mail->Body = $content;
+    $mail->AltBody = strip_tags($content);
+    if (!$mail->send()) {
+        throw new \Exception('邮件发送失败！请检查相关配置！');
+    }
+}

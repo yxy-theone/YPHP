@@ -8,7 +8,7 @@
 define('ROOT_PATH', str_replace('\\','/',dirname(dirname(__FILE__))));
 define('APP_PATH', ROOT_PATH.'/apps/blog');
 define('APP', 'blog');
-define('SITE_URL', 'http://blog.yjxxkj.cn');
+define('SITE_URL', 'http://blog.yuphp.cn');
 define('DEBUG', true);
 
 if (DEBUG) {

@@ -84,8 +84,8 @@ View::registerJsFile("common/wangEditor/js/wangEditor.min.js");
             <div class="form-group">
                 <label class="col-sm-2 control-label">文章内容</label>
                 <div class="col-sm-9">
-                    <textarea id="article_content" name="article_content" style="height:400px;max-height:500px;">
-                        <?php echo htmlspecialchars_decode($article["article_content"]) ?>
+                    <textarea id="article_content" name="article_content" style="width:100%;height:400px;max-height:500px;">
+                        <?php echo $article["article_content"] ?>
                     </textarea>
                 </div>
             </div>

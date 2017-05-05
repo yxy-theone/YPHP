@@ -8,7 +8,7 @@
 define('ROOT_PATH', str_replace('\\','/',dirname(dirname(__FILE__))));
 define('APP_PATH', ROOT_PATH.'/apps/api');
 define('APP', 'api');
-define('SITE_URL', 'http://api.yjxxkj.cn');
+define('SITE_URL', 'http://api.yuphp.cn');
 define('DEBUG', true);
 
 if (DEBUG) {

@@ -9,7 +9,8 @@ class IndexController extends \framework\Controller
 	public $login_sign = 'adminname';//指定登录标识 默认username
 
 	public function indexOp()
-	{
+	{	
+		$m_article = M('me/article');
 		$oss = \framework\lib\Conf::get('params','web')['oss-blog'];
 		$oss_url = 'http://'.$oss['hotel_bucket'].'.'.$oss['end_point'].'/';
 		$condition = [];
@@ -18,14 +19,18 @@ class IndexController extends \framework\Controller
         if($category > 0){
             $condition["category"]=$category;
         }
-		$articles = M('me/article')->getArticleList($condition,"*",10,"sort DESC,id DESC");
+		$articles = $m_article->getArticleList($condition,"*",10,"sort DESC,id DESC");
 		$categorys = M('me/article_category')->getCategory();
 		$tags = M('me/article_tag')->getTag();
+		$recommend_articles = $m_article->getArticleList(['recommend'=>1,'astrict'=>0,'state'=>0],"id,title,icon,click",8,"id DESC");//推荐文章
+		$new_articles = $m_article->getArticleList(['astrict'=>0,'state'=>0],"id,title,icon,click",8,"createtime DESC");//最新文章
 		$this->display('index',[
 			'oss_url'=>$oss_url,
 			'articles'=>$articles,
 			'categorys'=>$categorys,
-			'tags'=>$tags
+			'tags'=>$tags,
+			'recommend_articles'=>$recommend_articles,
+			'new_articles'=>$new_articles
 		]);
 	}
 
@@ -95,14 +100,39 @@ class IndexController extends \framework\Controller
 		}
 		$next_article = $m_article->order('id DESC')->getArticle(['id'=>['lt',$id]],'id,title');//下一篇
 		$prev_article = $m_article->order('id ASC')->getArticle(['id'=>['gt',$id]],'id,title');//上一篇
+		$oss = \framework\lib\Conf::get('params','web')['oss-blog'];
+		$oss_url = 'http://'.$oss['hotel_bucket'].'.'.$oss['end_point'].'/';
 		$categorys = M('me/article_category')->getCategory();
 		$tags = M('me/article_tag')->getTag();
+		$recommend_articles = $m_article->getArticleList(['recommend'=>1,'astrict'=>0,'state'=>0],"id,title,icon,click",8,"id DESC");//推荐文章
+		$new_articles = $m_article->getArticleList(['astrict'=>0,'state'=>0],"id,title,icon,click",8,"createtime DESC");//最新文章
 		$this->display('detail',[
 			'article'=>$article,
+			'oss_url'=>$oss_url,
 			'next_article'=>$next_article,
 			'prev_article'=>$prev_article,
 			'categorys'=>$categorys,
-			'tags'=>$tags
+			'tags'=>$tags,
+			'recommend_articles'=>$recommend_articles,
+			'new_articles'=>$new_articles
 		]);
+	}
+
+	/**
+	 * PHPMailer 测试
+	 */
+	public function emailTestOp(){
+		exit("test end");
+		$config = \framework\lib\Conf::get('mail','web');
+		try{
+		    $users = array('2135420174@qq.com');
+		    $title = 'YPHP';
+		    $content = '<h1>PHP是世界上最好的编程语言！</h1>';
+		    $attachment = array();
+		    sendMail($config,$users,$title,$content,$attachment);
+		    echo 'OK';
+		}catch(\Exception $e){
+		    var_dump($e->getMessage());
+		}
 	}
 }

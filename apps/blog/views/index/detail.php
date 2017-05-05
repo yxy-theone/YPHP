@@ -13,7 +13,7 @@ View::registerJsFile("http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js")
     <h1 id="article-title"><?php echo $article['title'] ?></h1>
     <div class="article-author">
     	<a href="javascript:;" target="_blank">
-    		<img class="Avatar article-authorAvatar" src="http://blog.yjxxkj.cn/resources/img/avatar.jpg">
+    		<img class="Avatar article-authorAvatar" src="http://blog.yuphp.cn/resources/img/avatar.jpg">
     	</a>
     	<a href="javascript:;" target="_blank" class="article-authorName"><?php echo $article['author_name'] ?></a>
         <span class="article-createtime"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;<?php echo date('Y-m-d H:i:s',$article['createtime']) ?></span>

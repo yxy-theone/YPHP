@@ -13,7 +13,7 @@ use framework\lib\Route;
 	<link rel="stylesheet" type="text/css" media="all" href="resources/common/reset.css" />
 	<link rel="stylesheet" href="resources/common/font-awesome.min.css">
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/comm.css">
+	<link rel="stylesheet" href="resources/css/comm.css?v=1">
 	<link rel="stylesheet" href="resources/css/toolbar.css">
 	<?php View::getCssFile() ?>
 </head>
@@ -60,6 +60,50 @@ use framework\lib\Route;
 	                    </h3>
 	                    <p>个人框架,个人项目,可以尝试入侵,但是希望能把手段和结果反馈给我,QQ:2135420174,我向你学习。准备整个项目安全贡献榜,哈哈。</p>
 	                    <hr class="tm-margin-t-small">
+	                    <div class="tab-div">
+	                      <div class="b-head">
+	                        <ul class="b-slt-tab">
+	                         	<li class="on" id="recommend-tab"><span class="b-tab-text">推荐文章</span></li>
+	                         	<li id="new-tab"><span class="b-tab-text">最新文章</span></li>
+	                        </ul>
+	                      </div>
+	                      <hr class="tab-hr">
+	                      <div class="b-body">
+	                        <ul class="rlist" id="recommend-tab-content">
+	                        <?php foreach ($recommend_articles as $k => $v) { ?>
+	                         	<li class="on">
+	                            	<i class="number n<?php echo $k+1 ?>"><?php echo $k+1 ?></i>
+	                            	<div class="preview">
+	                              		<a href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
+	                                		<img width="100%" height="100%" src="<?php echo $oss_url.$v['icon'] ?>">
+	                              		</a>
+	                            	</div>
+	                            	<a class="rl-info" href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
+	                              		<div class="title t"><?php echo $v['title'] ?></div>
+	                              		<div class="i"><b class="pts">浏览次数：<?php echo $v['click'] ?>次</b></div>
+	                            	</a>
+	                          	</li>
+	                        <?php } ?>
+	                        </ul>
+	                        <ul class="rlist" id="new-tab-content" style="display: none;">
+	                          	<?php foreach ($new_articles as $k => $v) { ?>
+	                          	 	<li class="on">
+	                          	    	<i class="number n<?php echo $k+1 ?>"><?php echo $k+1 ?></i>
+	                          	    	<div class="preview">
+	                          	      		<a href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
+	                          	        		<img width="100%" height="100%" src="<?php echo $oss_url.$v['icon'] ?>">
+	                          	      		</a>
+	                          	    	</div>
+	                          	    	<a class="rl-info" href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
+	                          	      		<div class="title t"><?php echo $v['title'] ?></div>
+	                          	      		<div class="i"><b class="pts">浏览次数：<?php echo $v['click'] ?>次</b></div>
+	                          	    	</a>
+	                          	  	</li>
+	                          	<?php } ?>
+	                        </ul>
+	                      </div>
+	                    </div>
+	                    <hr class="tm-margin-t-small">
 	                    <h3 class="tm-gold-text tm-title">
 	                        所有标签
 	                    </h3>
@@ -92,7 +136,7 @@ use framework\lib\Route;
 	                    </h3>
 	                    <nav>
 	                        <ul class="nav">
-	                            <li><a href="http://www.yjxxkj.cn" class="tm-footer-link">Mr.余</a></li>
+	                            <li><a href="http://www.yuphp.cn" class="tm-footer-link">Mr.余</a></li>
 	                            <li><a href="https://github.com/yxy-theone/YPHP" target="_blank" class="tm-footer-link">YPHP-Github</a></li>
 	                        </ul>
 	                    </nav>
@@ -107,7 +151,7 @@ use framework\lib\Route;
             <div class="col-xs-12 tm-copyright-col">
                 <p class="tm-copyright-text">
                     <span>Copyright &copy; 2016.Mr.余 All rights reserved.</span>
-                    <span id="power-span">Power By <a target="_blank" href="index.html">YPHP</a></span>
+                    <span id="power-span">Power By <a target="_blank" href="https://github.com/yxy-theone/YPHP">YPHP</a></span>
                 </p>
             </div>
         </div>
@@ -136,12 +180,24 @@ use framework\lib\Route;
             }  
         });  
 
-        //当点击跳转链接后，回到页面顶部位置  
-
+        //当点击跳转链接后，回到页面顶部位置
         $("#back-to-top").click(function(){  
             $('body,html').animate({scrollTop:0},800);  
             return false;  
-        });  
+        });
+
+        $(document).on('click', '#recommend-tab', function(event) {
+          $('#new-tab-content').hide();
+          $('#new-tab').removeClass('on');
+          $('#recommend-tab').addClass('on');
+          $('#recommend-tab-content').show();
+        });
+        $(document).on('click', '#new-tab', function(event) {
+          $('#recommend-tab-content').hide();
+          $('#recommend-tab').removeClass('on');
+          $('#new-tab').addClass('on');
+          $('#new-tab-content').show();
+        });
     }); 
 </script>
 </body>
