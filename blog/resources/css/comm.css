@@ -5,11 +5,14 @@ body {
     font-weight: 300;
     overflow-x: hidden !important;
 }
-
 a, button { transition: all 0.3s ease; }
 a:hover,
 a:focus {
     text-decoration: none;
+    outline: none;
+}
+button:hover,
+button:focus {
     outline: none;
 }
 pre {
@@ -742,4 +745,56 @@ p { line-height: 1.9; }
 .rlist li .i b.pts {
     background: 0;
     padding: 0;
+}
+
+
+/*侧边栏*/
+#make {
+    display: none;
+    background: #000;
+    opacity:0.5;
+    filter:alpha(opacity=50);
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.5s ease-in 0s;
+    z-index: 101;
+}
+#sidebar {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    box-sizing: border-box;
+    top: 0;
+    bottom: 0;
+    left: 2000px;
+    overflow-x: hidden;
+    transition: all 0.5s ease-in 0s;
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+#sidebar-click {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    z-index: 1000;
+    padding: .5rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background: 0 0;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    z-index: 1000;
+    background: white;
+    border-color: #cc9900;
+    color: #cc9900;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
 }

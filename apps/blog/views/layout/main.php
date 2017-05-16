@@ -13,7 +13,7 @@ use framework\lib\Route;
 	<link rel="stylesheet" type="text/css" media="all" href="resources/common/reset.css" />
 	<link rel="stylesheet" href="resources/common/font-awesome.min.css">
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/comm.css?v=3">
+	<link rel="stylesheet" href="resources/css/comm.css?v=4">
 	<link rel="stylesheet" href="resources/css/toolbar.css">
 	<?php View::getCssFile() ?>
 </head>
@@ -26,9 +26,6 @@ use framework\lib\Route;
             <div class="tm-header-inner">
                 <a href="<?php echo Route::urlManager('index/index')?>" class="navbar-brand tm-site-name">YPHP</a>
                 <nav class="navbar tm-main-nav">
-                    <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#tmNavbar">
-                        &#9776;
-                    </button>
                     <div class="collapse navbar-toggleable-sm" id="tmNavbar">
                         <ul class="nav navbar-nav">
                         	<li class="nav-item <?php echo empty($_GET['category'])?'active':''; ?>">
@@ -49,101 +46,69 @@ use framework\lib\Route;
 	<section class="tm-section">
 	    <div class="container-fluid">
 	        <div class="row">
-	            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+	            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 	                <?php echo $content ?>
 	            </div>
-
-	            <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 tm-aside-r">
-	                <div class="tm-aside-container">
-	                    <h3 class="tm-gold-text tm-title">
-	                        写在前面
-	                    </h3>
-	                    <p>个人框架,个人项目,可以尝试入侵,但是希望能把手段和结果反馈给我,QQ:2135420174,我向你学习。准备整个项目安全贡献榜,哈哈。</p>
-	                    <hr class="tm-margin-t-small">
-	                    <div class="tab-div">
-	                      <div class="b-head">
-	                        <ul class="b-slt-tab">
-	                         	<li class="on" id="recommend-tab"><span class="b-tab-text">推荐文章</span></li>
-	                         	<li id="new-tab"><span class="b-tab-text">最新文章</span></li>
-	                        </ul>
-	                      </div>
-	                      <hr class="tab-hr">
-	                      <div class="b-body">
-	                        <ul class="rlist" id="recommend-tab-content">
-	                        <?php foreach ($recommend_articles as $k => $v) { ?>
-	                         	<li class="on">
-	                            	<i class="number n<?php echo $k+1 ?>"><?php echo $k+1 ?></i>
-	                            	<div class="preview">
-	                              		<a href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
-	                                		<img width="100%" height="100%" src="<?php echo $oss_url.$v['icon'] ?>">
-	                              		</a>
-	                            	</div>
-	                            	<a class="rl-info" href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
-	                              		<div class="title t"><?php echo $v['title'] ?></div>
-	                              		<div class="i"><b class="pts">浏览次数：<?php echo $v['click'] ?>次</b></div>
-	                            	</a>
-	                          	</li>
-	                        <?php } ?>
-	                        </ul>
-	                        <ul class="rlist" id="new-tab-content" style="display: none;">
-	                          	<?php foreach ($new_articles as $k => $v) { ?>
-	                          	 	<li class="on">
-	                          	    	<i class="number n<?php echo $k+1 ?>"><?php echo $k+1 ?></i>
-	                          	    	<div class="preview">
-	                          	      		<a href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
-	                          	        		<img width="100%" height="100%" src="<?php echo $oss_url.$v['icon'] ?>">
-	                          	      		</a>
-	                          	    	</div>
-	                          	    	<a class="rl-info" href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>" title="<?php echo $v['title'] ?>" target="_blank">
-	                          	      		<div class="title t"><?php echo $v['title'] ?></div>
-	                          	      		<div class="i"><b class="pts">浏览次数：<?php echo $v['click'] ?>次</b></div>
-	                          	    	</a>
-	                          	  	</li>
-	                          	<?php } ?>
-	                        </ul>
-	                      </div>
-	                    </div>
-	                    <hr class="tm-margin-t-small">
-	                    <h3 class="tm-gold-text tm-title">
-	                        所有标签
-	                    </h3>
-	                    <nav id="tag-nav">
-	                        <ul class="nav">
-	                        	<?php foreach ($tags as $k => $tag) { ?>
-	                            	<li style="background:<?php echo $tag['color'] ?>;"><a href="#<?php echo $k ?>"><?php echo $tag['name'] ?></a></li>
-	                            <?php } ?>
-	                        </ul>
-	                    </nav>
-	                	<!--<hr class="tm-margin-t-small">
-						<h5 class="tm-gold-text tm-title">帮朋友推广，报来源优惠50元</h5>
-	                	<div class="ad">
-	                		<a href="" target="_blank">
-	                			<img src="" width="100%">
-	                		</a>
-	                	</div>-->
-	                	<hr class="tm-margin-t-small">
-	                    <h3 class="tm-gold-text tm-title">
-	                        友情链接
-	                    </h3>
-	                    <nav>
-	                        <ul class="nav">
-	                            <li><a href="javascript:;" class="tm-footer-link">聘游旅行TripOn</a></li>
-	                        </ul>
-	                    </nav>
-	                    <hr class="tm-margin-t-small">
-	                    <h3 class="tm-gold-text tm-title">
-	                        关于
-	                    </h3>
-	                    <nav>
-	                        <ul class="nav">
-	                            <li><a href="http://www.yuphp.cn" class="tm-footer-link">Mr.余</a></li>
-	                            <li><a href="https://github.com/yxy-theone/YPHP" target="_blank" class="tm-footer-link">YPHP-Github</a></li>
-	                        </ul>
-	                    </nav>
-	                </div> 
-	            </aside>
 	        </div>
 	    </div>
+	</section>
+	
+	<button id="sidebar-click">
+        &#9776;
+    </button>
+	<div id="make"></div>
+	<section id="sidebar" class="tm-aside-r col-xs-10 col-sm-10 col-md-6 col-lg-6 col-xl-3">
+	    <div class="tm-aside-container">
+	    	<div id="sidebar-nav">
+		    	<h3 class="tm-gold-text tm-title">
+		            分类导航
+		        </h3>
+		    	<nav>
+			    	<ul class="nav">
+			    		<?php foreach ($categorys as $k => $name) { ?>
+			    	    	<li class="nav-item <?php echo ($_GET['category']==$k)?'active':''; ?>">
+			    	    	    <a href="<?php echo Route::urlManager('index/index',['category'=>$k])?>" class="tm-footer-link"><?php echo $name; ?></a>
+			    	    	</li>
+			    	    <?php } ?>
+			    	</ul>
+		    	</nav>
+		    	<hr class="tm-margin-t-small">
+	    	</div>
+	        <h3 class="tm-gold-text tm-title">
+	            写在前面
+	        </h3>
+	        <p>个人框架,个人项目,可以尝试入侵,但是希望能把手段和结果反馈给我,QQ:2135420174,我向你学习。准备整个项目安全贡献榜,哈哈。</p>
+	        <hr class="tm-margin-t-small">
+	        <h3 class="tm-gold-text tm-title">
+	            所有标签
+	        </h3>
+	        <nav id="tag-nav">
+	            <ul class="nav">
+	            	<?php foreach ($tags as $k => $tag) { ?>
+	                	<li style="background:<?php echo $tag['color'] ?>;"><a href="#<?php echo $k ?>"><?php echo $tag['name'] ?></a></li>
+	                <?php } ?>
+	            </ul>
+	        </nav>
+	    	<hr class="tm-margin-t-small">
+	        <h3 class="tm-gold-text tm-title">
+	            友情链接
+	        </h3>
+	        <nav>
+	            <ul class="nav">
+	                <li><a href="javascript:;" class="tm-footer-link">聘游旅行TripOn</a></li>
+	            </ul>
+	        </nav>
+	        <hr class="tm-margin-t-small">
+	        <h3 class="tm-gold-text tm-title">
+	            关于
+	        </h3>
+	        <nav>
+	            <ul class="nav">
+	                <li><a href="http://www.yuphp.cn" class="tm-footer-link">Mr.余</a></li>
+	                <li><a href="https://github.com/yxy-theone/YPHP" target="_blank" class="tm-footer-link">YPHP-Github</a></li>
+	            </ul>
+	        </nav>
+	    </div> 
 	</section>
     
     <footer class="tm-footer">
@@ -197,6 +162,30 @@ use framework\lib\Route;
           $('#recommend-tab').removeClass('on');
           $('#new-tab').addClass('on');
           $('#new-tab-content').show();
+        });
+
+        $(document).on('click', '#sidebar-click', function(event) {
+        	var sidebar_width = parseInt($('#sidebar').css('width'));
+        	var body_width = parseInt($(document.body).css('width'));
+        	var left_width = (body_width-sidebar_width+12)+"px";
+        	if(body_width > 767){
+        		$("#sidebar-nav").hide();
+        	}
+			$('#sidebar').css("left",left_width);
+			$('#sidebar-click').hide();
+		    $("#make").show();
+			$("body").css({
+			  "overflow-y":"hidden"
+			});
+        });
+
+        $(document).on('click', '#make', function(event) {
+        	$("#make").hide();
+		    $('#sidebar').css("left","2000px");
+		    $('#sidebar-click').show();
+			$(document.body).css({
+			  "overflow-y":"auto"
+			});
         });
     }); 
 </script>

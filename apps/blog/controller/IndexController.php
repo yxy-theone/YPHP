@@ -19,7 +19,7 @@ class IndexController extends \framework\Controller
         if($category > 0){
             $condition["category"]=$category;
         }
-		$articles = $m_article->getArticleList($condition,"*",10,"sort DESC,id DESC");
+		$articles = $m_article->getArticleList($condition,"*",12,"sort DESC,id DESC");
 		$categorys = M('me/article_category')->getCategory();
 		$tags = M('me/article_tag')->getTag();
 		$recommend_articles = $m_article->getArticleList(['recommend'=>1,'astrict'=>0,'state'=>0],"id,title,icon,click",8,"id DESC");//推荐文章
@@ -67,7 +67,7 @@ class IndexController extends \framework\Controller
         if($category > 0){
             $condition["category"]=$category;
         }
-        $articles = M('me/article')->getArticleList($condition,"id,title,icon,category,tags,sort,recommend,astrict,createtime,updatetime",10,"sort DESC,id DESC");
+        $articles = M('me/article')->getArticleList($condition,"id,title,icon,category,tags,sort,recommend,astrict,createtime,updatetime",12,"sort DESC,id DESC");
         $categorys = M('me/article_category')->getCategory();
         if (empty($articles))
         	json_output(0,false,'没有更多');

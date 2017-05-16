@@ -4,14 +4,14 @@ use framework\lib\Route;
 
 View::$title = '博客首页';
 View::registerMetaTag(['name' => 'description', 'content' => 'YPHP']);
-View::registerJsFile("resources/js/blog.js?v=20170421");
+View::registerJsFile("resources/js/blog.js?v=20170516");
 ?>
 <?php if(empty($articles)){ ?>
 <h1 class="text-center" style="padding-top:50px;">暂无文章,看看其他内容吧!!!</h1>
 <?php }else{ ?>
 <div class="row tm-margin-t-big">
 	<?php foreach ($articles as $v) { ?>
-    <div class="col-xs-12 col-sm-12 col-md-6">
+    <div class="col-xs-12 col-sm-12 col-md-4">
         <div class="article-list-box">
             <div class="article-list-image">
                 <a  class="open-single-frame" href="<?php echo Route::urlManager('index/detail',['id'=>$v['id']])?>">
