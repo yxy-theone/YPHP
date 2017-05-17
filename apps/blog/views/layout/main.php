@@ -13,7 +13,7 @@ use framework\lib\Route;
 	<link rel="stylesheet" type="text/css" media="all" href="resources/common/reset.css" />
 	<link rel="stylesheet" href="resources/common/font-awesome.min.css">
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/comm.css?v=4">
+	<link rel="stylesheet" href="resources/css/comm.css?v=9">
 	<link rel="stylesheet" href="resources/css/toolbar.css">
 	<?php View::getCssFile() ?>
 </head>
@@ -151,31 +151,25 @@ use framework\lib\Route;
             return false;  
         });
 
-        $(document).on('click', '#recommend-tab', function(event) {
-          $('#new-tab-content').hide();
-          $('#new-tab').removeClass('on');
-          $('#recommend-tab').addClass('on');
-          $('#recommend-tab-content').show();
-        });
-        $(document).on('click', '#new-tab', function(event) {
-          $('#recommend-tab-content').hide();
-          $('#recommend-tab').removeClass('on');
-          $('#new-tab').addClass('on');
-          $('#new-tab-content').show();
-        });
-
+        var sidebar_width = parseInt($('#sidebar').css('width'));
+        var body_width = parseInt($(document.body).css('width'));
+        var left_width = (body_width-sidebar_width+12)+"px";
+        if(body_width > 767){
+        	$("#sidebar-nav").hide();
+        }
         $(document).on('click', '#sidebar-click', function(event) {
-        	var sidebar_width = parseInt($('#sidebar').css('width'));
-        	var body_width = parseInt($(document.body).css('width'));
-        	var left_width = (body_width-sidebar_width+12)+"px";
-        	if(body_width > 767){
-        		$("#sidebar-nav").hide();
-        	}
 			$('#sidebar').css("left",left_width);
-			$('#sidebar-click').hide();
 		    $("#make").show();
-			$("body").css({
-			  "overflow-y":"hidden"
+		    $('#sidebar-click').hide();
+			$(document.body).css({
+			  "overflow-y":"hidden",
+			  "width":"100%",
+			  "height":"100%"
+			});
+			$("html").css({
+			  "overflow-y":"hidden",
+			  "width":"100%",
+			  "height":"100%"
 			});
         });
 

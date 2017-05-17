@@ -1,3 +1,6 @@
+html {
+    overflow-x: hidden;/*防止移动端出现x轴滚动条*/
+}
 body {
     color: #000;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -762,7 +765,8 @@ p { line-height: 1.9; }
     left: 0;
     right: 0;
     transition: all 0.5s ease-in 0s;
-    z-index: 101;
+    z-index: 10;
+    cursor: pointer;
 }
 #sidebar {
     background: #fff;
@@ -775,7 +779,7 @@ p { line-height: 1.9; }
     bottom: 0;
     left: 2000px;
     overflow-x: hidden;
-    transition: all 0.5s ease-in 0s;
+    transition: all 0.3s ease 0s;
     padding-top: 50px;
     padding-bottom: 80px;
 }
