@@ -162,14 +162,10 @@ use framework\lib\Route;
 		    $("#make").show();
 		    $('#sidebar-click').hide();
 			$(document.body).css({
-			  "overflow-y":"hidden",
-			  "width":"100%",
-			  "height":"100%"
+			  "overflow-y":"hidden"
 			});
 			$("html").css({
-			  "overflow-y":"hidden",
-			  "width":"100%",
-			  "height":"100%"
+			  "overflow-y":"hidden"
 			});
         });
 
@@ -178,6 +174,9 @@ use framework\lib\Route;
 		    $('#sidebar').css("left","2000px");
 		    $('#sidebar-click').show();
 			$(document.body).css({
+			  "overflow-y":"auto"
+			});
+			$("html").css({
 			  "overflow-y":"auto"
 			});
         });
