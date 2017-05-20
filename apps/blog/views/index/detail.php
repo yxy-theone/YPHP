@@ -5,7 +5,7 @@ use framework\lib\Route;
 View::$title = '博客文章—'.$article['title'];
 View::registerMetaTag(['name' => 'description', 'content' => 'YPHP']);
 View::registerCssFile("http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css");
-View::registerCssFile("resources/css/article.css?v=1");
+View::registerCssFile("/resources/css/article.css?v=1");
 // View::registerCssFile("http://cdn.mengzhidu.com/file/highlight/solarized-light.css");
 View::registerJsFile("http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js");
 ?>

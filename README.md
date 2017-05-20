@@ -23,7 +23,7 @@ my php framework
 ```a
     <?php
     return [
-		'route_type'=>1,//路由类型 1常规 index.php?act=index&op=index  2美化  www.xx.com/index/index/id/1
+		'route_type'=>1,//路由类型 1常规 index.php?act=index&op=detail&id=1  2开启伪静态  www.xx.com/1.html
 		'log'=>[
 			'drive'=>'file',//默认日志操作驱动类  mysql,mongodb
 			'path'=>ROOT_PATH.'/storage/log/'.APP,//日志文件存放目录
@@ -47,6 +47,26 @@ my php framework
 		],
 		'captcha'=>'',
 	];
+```
+
+
+###route.php
+```a
+    <?php
+    return [
+    	'static_route'=>[
+    		'(\d+).html'=>'/index.php?act=index&op=detail&id=[$1]',
+    		'category\/(\d+).html'=>'/index.php?act=index&op=index&category=[$1]',
+    	],
+    	'native_route'=>[
+    		'index-index'=>[
+    			'index.php\?act=index&op=index&category=(\d+)'=>'/category/[$1].html',
+    		],
+    		'index-detail'=>[
+    			'index.php\?act=index&op=detail&id=(\d+)'=>'/[$1].html',
+    		]
+    	]
+    ];
 ```
 
 ###具体应用配置文件

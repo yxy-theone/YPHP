@@ -10,17 +10,16 @@ use framework\lib\Route;
 	<meta charset="UTF-8">
 	<title><?php echo View::$title; ?></title>
 	<?php View::getMetaTag() ?>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/common/reset.css" />
-	<link rel="stylesheet" href="resources/common/font-awesome.min.css">
-	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/comm.css?v=9">
-	<link rel="stylesheet" href="resources/css/toolbar.css">
+	<link rel="stylesheet" type="text/css" media="all" href="/resources/common/reset.css" />
+	<link rel="stylesheet" href="/resources/common/font-awesome.min.css">
+	<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/css/comm.css?v=9">
+	<link rel="stylesheet" href="/resources/css/toolbar.css">
 	<?php View::getCssFile() ?>
 </head>
 <body>
 <?php $act=$this->act;$op=$this->op;?>
 	<div class="tm-blog-img-container"></div>
-
 	<header>
         <div class="container-fluid">
             <div class="tm-header-inner">
@@ -130,8 +129,8 @@ use framework\lib\Route;
        <a href="javascript:;" id="back-to-top" class="toolbar-item toolbar-item-top" style="display:none"></a>
     </div>
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="resources/js/tether.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/tether.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 <?php View::getJsFile();?>
 <?php View::getJs();?>
 <script>  

@@ -13,39 +13,42 @@ class Route
 	public function __construct(){
 		$route_type = Conf::get('route_type','web');
 		self::$route_type = $route_type;
-		if ($route_type == 1) {//常规路由
-			$this->act = preg_match('/^[\w]+$/i',$_GET['act']) ? $_GET['act'] : 'index';
-			$this->op = preg_match('/^[\w]+$/i',$_GET['op']) ? $_GET['op'] : 'index';
-		}else{//路由美化 1.隐藏index.php 2.获取URL 参数部分
+		if ($route_type != 1) {//1.判断是否为原生uri 2.获取url伪静态配置 3.解析uri
 			if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != '/') {
-				# index/index
-				$path = $_SERVER['REQUEST_URI'];
-				$patharr = explode('/', trim($path,'/'));
-				if (isset($patharr[0])) {
-					$this->act = $patharr[0];
-					unset($patharr[0]);
-				}
-				if (isset($patharr[1])) {
-					$this->op = $patharr[1];
-					unset($patharr[1]);
+				$uri = ltrim($_SERVER['REQUEST_URI'],'/');
+				if(strrpos($uri, '.php?act=')||strrpos($uri, '.php?op=')){//此时认为是原生uri 无需进行伪静态解析
+					$this->getActAndOp();
+					return;
 				}else{
-					$this->op = 'index';
-				}
-				//url 多余部分转换成 $GET
-				// id/1/str/2/stst/3
-				$count = count($patharr);
-				$i=2;
-				while ($i <= $count) {
-					if (isset($patharr[$i+1])) {
-						$_GET[$patharr[$i]] = $patharr[$i+1];
+					$static_route = Conf::get('static_route','route');
+					//此处可以配合kv缓存,以md5($uri)作为缓存的k,解析后的url为v
+					foreach ($static_route as $k => $v) {
+						$pattern = '/^'.$k.'$/';
+						if(preg_match($pattern, $uri, $match)){
+							for ($i=1; $i < count($match); $i++) {
+								$s = '[$'.$i.']';
+								$v = str_replace($s, $match[$i], $v);
+							}
+							$v = str_replace('/index.php?', '', $v);
+							$v_arr = explode('&', trim($v));
+							foreach ($v_arr as $value) {
+								$arr = explode('=', $value);
+								$_GET[$arr[0]] = $arr[1];
+							}
+							$this->getActAndOp();
+							return;
+						}
 					}
-					$i += 2;
+					redirect(SITE_URL);
 				}
-			}else{
-				$this->act = 'index';
-				$this->op = 'index';
 			}
 		}
+		$this->getActAndOp();
+	}
+
+	public function getActAndOp(){
+		$this->act = preg_match('/^[\w]+$/i',$_GET['act']) ? $_GET['act'] : 'index';
+		$this->op = preg_match('/^[\w]+$/i',$_GET['op']) ? $_GET['op'] : 'index';
 	}
 
 	/**
@@ -62,16 +65,59 @@ class Route
 		}
 		$url_arr = explode('/',$url);
 		$p = '';
+		if (is_array($params)) {
+			foreach ($params as $k => $v) {
+				$p .= '&'.$k.'='.$v;
+			}
+		}
+		$script_name = empty($script_name)?'index.php':$script_name;
+		$url = '/'.$script_name.'?act='.$url_arr[0].'&op='.$url_arr[1].$p;
 		if(self::$route_type == 1){
-			if (is_array($params)) {
-				foreach ($params as $k => $v) {
-					$p .= '&'.$k.'='.$v;
+			return $url;
+		}else{//未完
+			$native_route = Conf::get('native_route','route');
+			$uri = ltrim($url,'/');
+			$native_key = $url_arr[0].'-'.$url_arr[1];
+			if(isset($native_route[$native_key])){
+				foreach ($native_route[$native_key] as $k => $v) {
+					$pattern = '/^'.$k.'$/';
+					if(preg_match($pattern, $uri, $match)){
+						for ($i=1; $i < count($match); $i++) {
+							$s = '[$'.$i.']';
+							$v = str_replace($s, $match[$i], $v);
+						}
+						return $v;
+					}
 				}
 			}
-			$url = empty($script)?'index.php?':$script_name.'?';
-			return $url.'act='.$url_arr[0].'&op='.$url_arr[1].$p;
-		}else{//未完
-			return $url_arr[0].'/'.$url_arr[1];
+			return $url;
 		}
+	}
+
+	public static function urlTest($url, $params=NULL){
+		$native_route = Conf::get('native_route','route');
+		$url_arr = explode('/',$url);
+		$p = '';
+		if (is_array($params)) {
+			foreach ($params as $k => $v) {
+				$p .= '&'.$k.'='.$v;
+			}
+		}
+		$url = '/index.php?act='.$url_arr[0].'&op='.$url_arr[1].$p;
+		$uri = ltrim($url,'/');
+		$native_key = $url_arr[0].'-'.$url_arr[1];
+		if(isset($native_route[$native_key])){
+			foreach ($native_route[$native_key] as $k => $v) {
+				$pattern = '/^'.$k.'$/';
+				if(preg_match($pattern, $uri, $match)){
+					for ($i=1; $i < count($match); $i++) {
+						$s = '[$'.$i.']';
+						$v = str_replace($s, $match[$i], $v);
+					}
+					return $v;
+				}
+			}
+		}
+		return $url;
 	}
 }

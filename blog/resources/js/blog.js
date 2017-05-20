@@ -7,7 +7,7 @@
 		var category = $("#loadmore").attr('_category');
 		_page_++;
 		var loadingFlag = false,
-			_url="index.php?op=getArticles&_page_="+_page_+"&category="+category,
+			_url="/index.php?op=getArticles&_page_="+_page_+"&category="+category,
 			$loadingJuhua = $("#juhua-loading"),
 			$loadMoreBtn  = $("#loadmore");
 		if(!loadingFlag){
@@ -50,6 +50,4 @@
 		}
 	}
 	$(".btn-loadmore").on("click",loadMoreData);
-
-	
 }(window,jQuery));

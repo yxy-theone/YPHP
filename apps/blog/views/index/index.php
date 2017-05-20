@@ -4,7 +4,7 @@ use framework\lib\Route;
 
 View::$title = '博客首页';
 View::registerMetaTag(['name' => 'description', 'content' => 'YPHP']);
-View::registerJsFile("resources/js/blog.js?v=20170516");
+View::registerJsFile("/resources/js/blog.js?v=20170520");
 ?>
 <?php if(empty($articles)){ ?>
 <h1 class="text-center" style="padding-top:50px;">暂无文章,看看其他内容吧!!!</h1>
@@ -38,6 +38,6 @@ View::registerJsFile("resources/js/blog.js?v=20170516");
     <a class="btn-loadmore" href="javascript:;" title="更多文章">更多文章</a>
 </div>    
 <div id="juhua-loading">
-    <img alt="Loading..." src="resources/img/loading.gif"><span> </span>
+    <img alt="Loading..." src="/resources/img/loading.gif"><span> </span>
 </div>
 <?php } ?>
